@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur de commande | La Boutique Française{% endblock %}
+
+{% block content %}
+    <h2>Erreur de commande</h2>
+    <p>
+        Bonjour <strong>{{ app.user.firstname }} {{ app.user.lastname }}</strong>,<br>
+        Une erreur est survenue lors de la validation de votre commande n°<strong>{{ order.reference }}</strong>.<br>
+        Merci de bien vouloir nous contacter pour plus d'informations.
+        
+        Une confirmation vient de vous être envoyée par email à l'adresse <strong>{{ app.user.email }}</strong>.
+        <hr>
+        <a href="{{ path('app_order') }}" class="btn btn-success">Réessayer le paiement</a>
+    </p>
+{% endblock %}

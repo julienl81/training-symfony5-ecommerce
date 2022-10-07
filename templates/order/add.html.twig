@@ -54,12 +54,12 @@
 
             <hr>
             <strong>Sous-total :</strong> {{ (total / 100)|number_format(2,',','.') }} €<br>
-            <strong>Livraison :</strong> {{ carrier.price|number_format(2,',','.') }} €
+            <strong>Livraison :</strong> {{ (carrier.price / 100)|number_format(2,',','.') }} €
             <hr>
-            <strong>Total :</strong> {{ ((total / 100) + carrier.price)|number_format(2,',','.') }}
+            <strong>Total :</strong> {{ ((total / 100) + (carrier.price / 100))|number_format(2,',','.') }}
 
 
-        <a class="btn btn-success btn-block mt-3" id="checkout-button">Payer | {{ ((total / 100) + carrier.price)|number_format(2,',','.') }} €</a>
+        <a class="btn btn-success btn-block mt-3" id="checkout-button">Payer | {{ ((total / 100) + (carrier.price / 100))|number_format(2,',','.') }} €</a>
         </div>
     </div>
 {% endblock %}
@@ -69,14 +69,18 @@
         var stripe = Stripe("pk_test_51LptIoKlvmFaFBYE84BG89jKJ2fmw99BRqd57L73Xv76XaBmPUPahCjVxQOr2uNVyG4GdLCD2XoCzWtnWMnZBrXz00EGj8FQv6");
         var checkoutButton = document.getElementById("checkout-button");
         checkoutButton.addEventListener("click", function () {
-                fetch("/commande/create-session", {
+                fetch("/commande/create-session/{{ reference }}", {
                     method: "POST",
                 })
                 .then(function (response) {
                     return response.json();
                 })
                 .then(function (session) {
-                    return stripe.redirectToCheckout({ sessionId: session.id });
+                    if (session.error == 'order') {
+                        window.location.replace('{{ path('app_order') }}') 
+                    } else {
+                        return stripe.redirectToCheckout({ sessionId: session.id });
+                    }
                 })
                 .then(function (result) {
                     // If redirectToCheckout fails due to a browser or network
