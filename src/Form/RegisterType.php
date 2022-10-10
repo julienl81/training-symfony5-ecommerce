@@ -31,7 +31,7 @@ class RegisterType extends AbstractType
             ->add('lastname', TextType::class, [
                 'constraints' => new Length([
                     'min' => 2,
-                    'max' => 30
+                    'max' => 200
                 ]),
                 'label' => 'Votre nom',
                 'attr' => [
