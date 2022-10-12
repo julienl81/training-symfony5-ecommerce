@@ -5,14 +5,35 @@
 {% block content %}
 
 <h1>Mon compte</h1>
-Bienvenue {{app.user.firstname}} dans votre espace membre. <br>
-<hr>
     {% if is_granted('ROLE_ADMIN') %}
-    - <a href="{{ path('admin') }}">Vous êtes un administrateur, accéder au backoffice ?</a><br/>
+    - <small><a href="{{ path('admin') }}">Vous êtes un administrateur, accéder au backoffice ?</a></small><br/>
     {% endif %}
-    - <a href="{{ path('app_account_password') }}">Modifier mon mot de passe</a><br/>
-    - <a href="{{ path('app_account_address') }}">Gérer mes adresses</a><br/>
-    - <a href="{{ path('app_account_order') }}">Mes commandes</a>
-<hr>
+
+    Bienvenue {{app.user.firstname}} dans votre espace membre. <br>
+    <hr>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="account-item text-center">
+            <img src="{{asset('assets/img/mot-de-passe.png')}}" alt="modifier le mot de passe"><br>
+            <a href="{{ path('app_account_password') }}">Modifier mon mot de passe</a>
+            </div>
+        </div>
+ 
+        <div class="col-md-4">
+            <div class="account-item text-center">
+            <img src="{{asset('assets/img/adresse-du-domicile.png')}}" alt="Gérer mes adresses"><br>
+            <a href="{{ path('app_account_address') }}">Gérer mes adresses</a>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="account-item text-center">
+            <img src="{{asset('assets/img/checkout.png')}}" alt="gérer mes commandes"><br>
+            <a href="{{ path('app_account_order') }}">Mes commandes</a>
+            </div>
+        </div>
+
+    </div>
 
 {% endblock %}
