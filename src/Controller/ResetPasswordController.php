@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class ResetPasswordController extends AbstractController
 {
@@ -24,6 +25,7 @@ class ResetPasswordController extends AbstractController
 
     /**
      * @Route("/mot-de-passe-oublie", name="app_reset_password")
+     * @isGranted("ROLE_ADMIN")
      */
     public function index(Request $request): Response
     {
