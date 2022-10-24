@@ -27,6 +27,7 @@ class ResetPasswordController extends AbstractController
      */
     public function index(Request $request): Response
     {
+        
         if ($this->getUser()) {
             return $this->redirectToRoute('app_home');
         }
@@ -68,6 +69,16 @@ class ResetPasswordController extends AbstractController
      */
     public function update(Request $request, $token, UserPasswordHasherInterface $userPasswordHasher): Response
     {
+        dd($this->getUser()->getRoles());
+        $notification = null;
+
+        if ($this->getUser()->getRoles() == 'ROLE_ADMIN') {
+            $this->addFlash('notice', 'Bien essayé :) ');
+            return $this->redirectToRoute('app_account');
+        }
+
+
+
         $reset_password = $this->entityManager->getRepository(ResetPassword::class)->findOneByToken($token);
 
         if(!$reset_password) {

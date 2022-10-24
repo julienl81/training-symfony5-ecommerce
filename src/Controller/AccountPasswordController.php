@@ -9,17 +9,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 class AccountPasswordController extends AbstractController
 {
     /**
      * @Route("/compte/modifier-mon-mot-passe", name="app_account_password")
+     * @isGranted("ROLE_ADMIN")
      */
     public function index(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $notification = null;
-
+     
         // recuperer le user connecté à envoyer au formulaire pour avoir son mot de passe et ses infos
         $user = $this->getUser();
         $form = $this->createForm(ChangePasswordType::class, $user);

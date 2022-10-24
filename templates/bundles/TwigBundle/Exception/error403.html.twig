@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page introuvable - La boutique française{% endblock %}
+
+{% block content %}
+<div class="block-small">
+    <h2>Accès non autorisé</h2>
+    <p>Bien essayé 😊</p>
+    <a href="{{ path('app_account') }}" class="btn btn-info">Revenir à mon compte</a>
+    <a href="{{ path('app_home') }}" class="btn btn-info">Revenir à l'accueil</a>
+</div>
+{% endblock %}

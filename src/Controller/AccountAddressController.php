@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class AccountAddressController extends AbstractController
 {
@@ -23,6 +24,7 @@ class AccountAddressController extends AbstractController
 
     /**
      * @Route("/compte/ajouter-une-adresse", name="app_account_address_add")
+     * @IsGranted("ROLE_USER")
      */
     public function add(Request $request, EntityManagerInterface $entityManager, Cart $cart): Response
     {
@@ -47,6 +49,7 @@ class AccountAddressController extends AbstractController
 
     /**
      * @Route("/compte/modifier-une-adresse/{id}", name="app_account_address_edit")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function edit(Request $request, EntityManagerInterface $entityManager, $id): Response
     {
@@ -72,6 +75,7 @@ class AccountAddressController extends AbstractController
 
     /**
      * @Route("/compte/supprimer-une-adresse/{id}", name="app_account_address_delete")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function delete(EntityManagerInterface $entityManager, $id): Response
     {
