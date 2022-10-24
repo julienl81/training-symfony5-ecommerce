@@ -22,7 +22,7 @@ class StripeController extends AbstractController
     {
 
         $product_for_stripe = [];
-        $YOUR_DOMAIN = 'http://localhost:8000';
+        $YOUR_DOMAIN = 'http://http://laboutiquefrancaise.julienlaurent.com/';
 
         $order = $entityManager->getRepository(Order::class)->findOneByReference($reference);
 
