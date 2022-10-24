@@ -17,7 +17,7 @@ class Mail
         'Messages' => [
             [
                 'From' => [
-                    'Email' => 'julienlaurent77@outlook.com',
+                    'Email' => 'julienlaurent77@gmail.com',
                     'Name' => 'La Boutique Française'
                 ],
                 'To' => [
@@ -37,7 +37,7 @@ class Mail
     ];
 
     $response = $mj->post(Resources::$Email, ['body' => $body]);
-    $response->success() && dump($response->getData());
+    $response->success();
 
     }
 
